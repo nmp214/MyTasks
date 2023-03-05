@@ -20,6 +20,11 @@ namespace MyTasks.Controllers
 
         private ITask taskSer;
 
+        public TasksController(ITask taskSer)
+        {
+            this.taskSer = taskSer;
+        }
+
         [HttpGet]
         public IEnumerable<MyTask> Get()
         {

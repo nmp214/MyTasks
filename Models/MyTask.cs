@@ -8,5 +8,11 @@ namespace MyTasks.Models
     public string? Name { get; set; }
 
     public bool IsDone { get; set; }
+
+    public MyTask(int Id, string Name, bool IsDone){
+        this.Id = Id;
+        this.Name = Name;
+        this.IsDone = IsDone;
+    }
 }
 }
