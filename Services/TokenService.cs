@@ -12,8 +12,6 @@ namespace MyTasks.Services
 {
     public static class TokenService
     {
-        public static List<User> users = new List<User> {new User(273, "Chaim", "34", "Admin"), new User(111, "Rachel", "@aabb123", "User"), new User(222, "Yair", "ym03626!", "User") };
-
         private static SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SXkSqsKyNUyvGbnHs7ke2NCq8zQzNLW7mPmHbnZZ"));
         private static string issuer = "https://fbi-demo.com";
         public static SecurityToken GetToken(List<Claim> claims) =>

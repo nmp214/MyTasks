@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyTasks.Models;
 using MyTasks.Services;
+using MyTasks.Interfaces;
 
 namespace MyTasks.Controllers
 {
@@ -15,40 +16,33 @@ namespace MyTasks.Controllers
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
+        private IUser userSer;
+
         public List<Claim> claims = new List<Claim>();
-        public AdminController()
-        {
-            this.claims = claims;
-        }
+        // public AdminController()
+        // {
+        //     this.claims = claims;
+        //     this.userSer = userSer;
+        // }
 
         [HttpPost]
         [Route("[action]")]
         public ActionResult<String> Login([FromBody] User User)
         {
-            User newUser = null;
-            Boolean isAdminExists = false;
-            Boolean isUserExists = false;
-            List<User> users = TokenService.users;
-            foreach (User user in users)
-            {
-                if (user.kind == "Admin" && user.UserName == User.UserName && user.Password == User.Password)
-                    isAdminExists = true;
-                if (user.kind == "User" && user.UserName == User.UserName && user.Password == User.Password)
-                {
-                    isUserExists = true;
-                    newUser = user;
-                    break;
-                }
-            }
-            if (!isAdminExists && !isUserExists)
+            System.Console.WriteLine("in login");
+            User newUser;
+            System.Console.WriteLine("newUser");
+            newUser = userSer.Login(User);
+            System.Console.WriteLine(newUser.ToString());
+            if (newUser == null)
                 return Unauthorized();
 
-            if (isAdminExists)
+            if (newUser.kind == "Admin")
             {
                 claims.Add(new Claim("type", "Admin"));
                 claims.Add(new Claim("ID", "273"));
             }
-            if (isUserExists)
+            if (newUser.kind == "User")
             {
                 claims.Add(new Claim("type", "User"));
                 claims.Add(new Claim("ID", newUser.UserId.ToString()));

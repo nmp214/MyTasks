@@ -4,5 +4,17 @@
         "userName": "Rachel",
         "password": "@aabb123",
         "kind": "User"
+    },
+    {
+        "UserId": 2,
+        "userName": "someone",
+        "password": "8822hh",
+        "kind": "User"
+    },
+    {
+        "UserId": 3,
+        "userName": "happyMan",
+        "password": "18138615",
+        "kind": "User"
     }
 ]

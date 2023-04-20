@@ -53,15 +53,15 @@ namespace MyTasks.Services
             System.Console.WriteLine("token: " + token);
             System.Console.WriteLine((JwtSecurityToken)token);
             JwtSecurityToken t = (JwtSecurityToken)token;
-            tokenId = t.Claims.FirstOrDefault(t => t.Type == "ID").ToString();
+            tokenId = t.Claims.FirstOrDefault(t => t.Type == "ID").Value.ToString();
             System.Console.WriteLine("id:" + tokenId);
         }
 
         public List<MyTask> GetAll()
         {
-            System.Console.WriteLine("in task service. tokenid: " + tokenId);
+            System.Console.WriteLine("in task service. tokenid: " + tokenId + "userid: " + tasks.First().UserId);
             List<MyTask> newTasks = tasks.Where(t => t.UserId.ToString() == tokenId).ToList();
-            return tasks;
+            return newTasks;
         }
         public MyTask Get(int id) => tasks.FirstOrDefault(t => t.Id == id && t.UserId.ToString() == tokenId);
 

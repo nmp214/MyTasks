@@ -17,11 +17,14 @@ namespace MyTasks.Services
 {
     public class UserService : IUser
     {
-        List<User> users { get; }
+        private List<User> users { get; }=new List<User>();
         private string filePath;
         private IWebHostEnvironment webHost;
         AdminController adminController = new AdminController();
 
+        public UserService()
+        {
+        }
         public UserService(IWebHostEnvironment webHost)
         {
             this.webHost = webHost;
@@ -56,15 +59,17 @@ namespace MyTasks.Services
             System.Console.WriteLine("id:" + id);
         }
 
+        public User Login(User user)
+        {
+            System.Console.WriteLine(users.ToString());
+            User newUser = users.FirstOrDefault(u => u.UserId == user.UserId && u.UserName == user.UserName && u.Password == user.Password);
+            System.Console.WriteLine("new: " + newUser.ToString());
+            return newUser;
+        }
+
         public List<User> GetAll()
         {
             System.Console.WriteLine("in user service");
-            // Claim c; string id;
-            // c = adminController.claims.FirstOrDefault(t => t.Type == "ID");
-            // if (c != null)
-            //     id = c.ToString();
-            // // string t = adminController.getToken();
-            // // System.Console.WriteLine("in service. t: " + t);
             return users;
         }
 

@@ -6,6 +6,7 @@ namespace MyTasks.Interfaces
 {
     public interface IUser
     {
+        public User Login(User user);
         public List<User> GetAll();
 
         public User Get(int id);
