@@ -27,3 +27,11 @@ C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\obj\D
 C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\obj\Debug\net6.0\ref\MyTasks.dll
 C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\MyTasks.staticwebassets.runtime.json
 C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\data\task.json
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Dell Vostro\Documents\תיכנות\שנה ב\Core\project\MyTasks\bin\Debug\net6.0\Data\user.json

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using MyTasks.Interfaces;
-using MyTasks.Models;
+using MyTasks.Services;
 using MyTask = MyTasks.Models.MyTask;
 
 
@@ -17,8 +17,8 @@ namespace MyTasks.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
-
         private ITask taskSer;
+        AdminController u = new AdminController();
 
         public TasksController(ITask taskSer)
         {

@@ -18,8 +18,14 @@ namespace MyTasks.Utilities
 {
     public static class Helper
     {
-        public static void AddTasks(this IServiceCollection service){
+        public static void AddTasks(this IServiceCollection service)
+        {
             service.AddSingleton<ITask, TaskService>();
+        }
+
+        public static void AddUsers(this IServiceCollection service)
+        {
+            service.AddSingleton<IUser, UserService>();
         }
     }
 }

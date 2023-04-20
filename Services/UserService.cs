@@ -15,22 +15,21 @@ using System.Security.Claims;
 
 namespace MyTasks.Services
 {
-    public class TaskService : ITask
+    public class UserService : IUser
     {
-        private static string tokenId;
-        List<MyTask> tasks { get; }
+        List<User> users { get; }
         private string filePath;
         private IWebHostEnvironment webHost;
         AdminController adminController = new AdminController();
 
-        public TaskService(IWebHostEnvironment webHost)
+        public UserService(IWebHostEnvironment webHost)
         {
             this.webHost = webHost;
-            this.filePath = Path.Combine(webHost.ContentRootPath, "data", "task.json");
+            this.filePath = Path.Combine(webHost.ContentRootPath, "data", "user.json");
 
             using (var jsonFile = File.OpenText(filePath))
             {
-                tasks = JsonSerializer.Deserialize<List<MyTask>>(jsonFile.ReadToEnd(),
+                users = JsonSerializer.Deserialize<List<User>>(jsonFile.ReadToEnd(),
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
@@ -40,7 +39,7 @@ namespace MyTasks.Services
 
         public void savaToFile()
         {
-            File.WriteAllText(filePath, JsonSerializer.Serialize(tasks));
+            File.WriteAllText(filePath, JsonSerializer.Serialize(users));
         }
 
         public static void getToken(List<Claim> claims, SecurityToken token)
@@ -53,41 +52,50 @@ namespace MyTasks.Services
             System.Console.WriteLine("token: " + token);
             System.Console.WriteLine((JwtSecurityToken)token);
             JwtSecurityToken t = (JwtSecurityToken)token;
-            tokenId = t.Claims.FirstOrDefault(t => t.Type == "ID").ToString();
-            System.Console.WriteLine("id:" + tokenId);
+            string id = t.Claims.FirstOrDefault(t => t.Type == "ID").ToString();
+            System.Console.WriteLine("id:" + id);
         }
 
-        public List<MyTask> GetAll()
+        public List<User> GetAll()
         {
-            System.Console.WriteLine("in task service. tokenid: " + tokenId);
-            List<MyTask> newTasks = tasks.Where(t => t.UserId.ToString() == tokenId).ToList();
-            return tasks;
+            System.Console.WriteLine("in user service");
+            // Claim c; string id;
+            // c = adminController.claims.FirstOrDefault(t => t.Type == "ID");
+            // if (c != null)
+            //     id = c.ToString();
+            // // string t = adminController.getToken();
+            // // System.Console.WriteLine("in service. t: " + t);
+            return users;
         }
-        public MyTask Get(int id) => tasks.FirstOrDefault(t => t.Id == id && t.UserId.ToString() == tokenId);
 
-        public void Add(MyTask task)
+        public void Add(User user)
         {
-            task.Id = tasks.Max(t => t.Id) + 1;
-            tasks.Add(task);
+            user.UserId = users.Max(t => t.UserId) + 1;
+            users.Add(user);
             savaToFile();
         }
 
-        public bool Update(int id, MyTask newTask)
+        public User Get(int id) => users.FirstOrDefault(t => t.UserId == id);
+
+
+        public bool Update(int id, User newUser)
         {
-            if (newTask.Id != id)
+            if (newUser.UserId != id)
                 return false;
-            var task = tasks.FirstOrDefault(t => t.Id == id && t.UserId.ToString() == tokenId);
-            task.Name = newTask.Name;
-            task.IsDone = newTask.IsDone;
+            var user = users.FirstOrDefault(t => t.UserId == id);
+            user.UserName = newUser.UserName;
+            user.Password = newUser.Password;
+            user.kind = newUser.kind;
+
             savaToFile();
             return true;
         }
         public bool Delete(int id)
         {
-            var task = tasks.FirstOrDefault(t => t.Id == id && t.UserId.ToString() == tokenId);
-            if (task == null)
+            var user = users.FirstOrDefault(t => t.UserId == id);
+            if (user == null)
                 return false;
-            tasks.Remove(task);
+            users.Remove(user);
             savaToFile();
             return true;
         }
